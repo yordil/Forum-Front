@@ -6,7 +6,7 @@ import Footer from '../Components/Footer/Footer';
 const Loginpage = () => {
   return (
 		<div className="flex flex-col flex-grow" >
-			<Header />
+			{/* <Header /> */}
 			<Login />
 			<Footer />
 		</div>

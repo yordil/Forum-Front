@@ -45,7 +45,7 @@ function Homepage() {
 		<div>
 			<Header />
 
-			<div className="sm-block mt-10 md:flex w-[70%] ml-auto mr-auto mb-8 justify-between ">
+			<div className="sm-block mt-10 md:flex w-[70%] ml-auto mr-auto mb-8 justify-between">
 				<div className="sm:hidden md:inline bg-blue-600 w-40 text-l rounded-md text-white h-8 text-center ">
 					<p className="mt-1 ">Welcome {user.username}</p>
 				</div>
@@ -67,7 +67,7 @@ function Homepage() {
 					/>
 				))
 			) : (
-				<p>no data</p>
+				<p className="text-4xl text-center mt-32 text-red-600">No questions Asked</p>
 			)}
 
 			<div className="mt-10">

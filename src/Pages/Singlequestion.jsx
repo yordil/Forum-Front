@@ -7,8 +7,26 @@ import axiosInstance from "../Utility/axios";
 import { useParams } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import Answercard from "../Components/AnswerCard/Answercard";
-import { keyframes } from "@emotion/react";
+import Snackbar from "@mui/material/Snackbar";
+
+
+
 const Singlequestion = () => {
+
+	 const [open, setOpen] = useState(false);
+
+		
+		
+		const handleClose = (event, reason) => {
+			if (reason === "clickaway") {
+				return;
+			}
+			setOpen(false);
+		};
+
+
+	const [text , setText] = useState("")
+
 	const [question, setQuestion] = useState(null);
 	const [answers, setAnswers] = useState(null);
 	const [error , setError] = useState(null);
@@ -23,7 +41,9 @@ const Singlequestion = () => {
 		}
 
 		try {
-			window.location.reload();
+			
+
+			setText("")
 			const token = localStorage.getItem("token");
 			await axiosInstance.post(
 				`/answer/${id}`,
@@ -36,6 +56,10 @@ const Singlequestion = () => {
 					},
 				}
 			);
+			setOpen(true);
+			setTimeout(function () {
+				window.location.reload();
+			}, 3000);
 			
 		} catch (err) {
 			console.log(err);
@@ -62,10 +86,11 @@ const Singlequestion = () => {
 		}
 	};
 
+	
 	// add the effect when post answer button clicked
 	useEffect(() => {
 		fetchQuestion();
-	}, []);
+	}, [] , );
 
 	return (
 		<div className="flex flex-col min-h-screen">
@@ -121,7 +146,7 @@ const Singlequestion = () => {
 							<textarea
 								style={{ resize: "none" }}
 								ref={ans}
-								type="text"
+								type= "text"
 								id="answer"
 								name="answer"
 								className="w-full h-40 placeholder-slate-500 hover:to-blue-600 rounded-lg border border-gray-900 focus:shadow-outline focus:border-blue-500"
@@ -143,6 +168,15 @@ const Singlequestion = () => {
 				</div>
 			</div>
 			<Footer className="mt-auto" />
+			<Snackbar
+				anchorOrigin={{ vertical: "top", horizontal: "center" }}
+				open={open}
+				onClose={handleClose}
+				message=" Your answer Posted successfully"
+				autoHideDuration={3000}
+				key={"topcenter"}
+			/>
+			;
 		</div>
 	);
 };
